@@ -23,8 +23,8 @@ module PhotoStore
     finish_time = self.calc_finish_time(parsed_visit_day(placed_at), placed_at, opening_hours)
     return processing_order_time if processing_order_time.between?(start_time, finish_time)
 
-    postponed_days_amount = parsed_visit_day(placed_at) == 'Fri' ? 3 : 1
-    start_time + (processing_order_time - finish_time) + postponed_days_amount * 86_400
+    postponed_days_amount = parsed_visit_day(placed_at) == 'Fri' ? 3 * 86_400 : 1 * 86_400
+    start_time + (processing_order_time - finish_time) + postponed_days_amount
   end
 
   private
